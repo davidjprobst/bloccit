@@ -9,9 +9,17 @@ describe("routes : static", () => {
       request.get(base, (err, res, body) => {
         expect(res.statusCode).toBe(200);
         expect(body).toContain("Welcome to Bloccit");
-        done();
       });
     });
   });
+
+  describe("GET /" () => {
+    it("should return status code 200 and have 'About Us' in the body of the response", () => {
+      request.get(base + "about", (err, res, body) => {
+        expect(res.statusCode).toBe(200);
+        expect(body).toContain("About Usgi");
+      })
+    })
+  })
 
 });
