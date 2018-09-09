@@ -11,6 +11,7 @@ bloccit/src/views/posts/show.ejs
       <h1><%= post.title %></h1>
       <form style="display:intial" action="/topics/<% post.topicId %>/posts/<% post.id %>/destroy" method="post">
         <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="/topics/<%= post.topicId %>/posts/<%= post.id %>/edit" class="btn btn-warning">Edit</a>
       </form>
       <p><%= post.body %></p>
     </main>
