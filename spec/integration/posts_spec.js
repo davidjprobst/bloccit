@@ -75,8 +75,19 @@ describe("routes : posts", () => {
             console.log(err);
             done();
           });
-        }
-      );
+        });
+    });
+
+  });
+
+  describe("GET /topics/:topicId/posts/:id", () => {
+
+    it("should render a view with the selected post", (done) => {
+      request.get(`${base}/${this.topic.id}/posts/${this.post.id}`, (err, res, body) => {
+        expect(err).toBeNull();
+        expect(body).toContain("Snowball Fighting");
+        done();
+      });
     });
 
   });
