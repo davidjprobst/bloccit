@@ -85,22 +85,21 @@ describe("routes : posts", () => {
           title: "a",
           body: "b"
         }
-  };
+      };
 
-  request.post(options,
-    (err, res, body) => {
-      Post.findOne({where: {title: "a"}})
-      .then((post) => {
-          expect(post).toBeNull();
-          done();
-      })
-      .catch((err) => {
-        console.log(err);
-        done();
-      });
-    }
-  );
-});
+      request.post(options,
+        (err, res, body) => {
+          Post.findOne({where: {title: "a"}})
+          .then((post) => {
+              expect(post).toBeNull();
+              done();
+          })
+          .catch((err) => {
+            console.log(err);
+            done();
+          });
+        });
+    });
 
   });
 
