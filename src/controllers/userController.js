@@ -2,6 +2,7 @@ const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
 
 module.exports = {
+  
   signUp(req, res, next){
     res.render("users/sign_up");
   },
@@ -23,5 +24,22 @@ module.exports = {
         })
       }
     });
+  },
+
+  signInForm(req, res, next) {
+    res.render("users/sign_in");
+  },
+
+  signIn(req, res, next) {
+    passport.authenticate("local")(req, res, function () {
+      if(!req.user){
+        req.flash("notice", "Sign in failed. Please try again.")
+        res.redirect("/users/sign_in");
+      } else {
+        req.flash("notice", "You've sucessfully signed in!");
+        res.redirect("/");
+      }
+    })
   }
+
 }
