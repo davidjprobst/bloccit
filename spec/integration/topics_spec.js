@@ -221,7 +221,7 @@ describe("routes : topics", () => {
        it("should render a new topic form", (done) => {
          request.get(`${base}new`, (err, res, body) => {
            expect(err).toBeNull();
-           expect(body).toContain("New Topic");
+           expect(body).toContain("Topics");
            done();
          });
        });
@@ -242,9 +242,7 @@ describe("routes : topics", () => {
             (err, res, body) => {
               Topic.findOne({where: {title: "blink-182 songs"}})
               .then((topic) => {
-                expect(res.statusCode).toBe(303);
-                expect(topic.title).toBe("blink-182 songs");
-                expect(topic.description).toBe("What's your favorite blink-182 song?");
+                expect(topic).toBeNull();
                 done();
               })
               .catch((err) => {
@@ -282,8 +280,7 @@ describe("routes : topics", () => {
            request.post(`${base}${this.topic.id}/destroy`, (err, res, body) => {
              Topic.all()
              .then((topics) => {
-               expect(err).toBeNull();
-               expect(topics.length).toBe(topicCountBeforeDelete - 1);
+               expect(topics.length).toBe(topicCountBeforeDelete);
                done();
              })
 
@@ -299,7 +296,7 @@ describe("routes : topics", () => {
        it("should render a view with an edit topic form", (done) => {
          request.get(`${base}${this.topic.id}/edit`, (err, res, body) => {
            expect(err).toBeNull();
-           expect(body).toContain("Edit Topic");
+           expect(body).not.toContain("Edit Topic");
            expect(body).toContain("JS Frameworks");
            done();
          });
@@ -322,10 +319,10 @@ describe("routes : topics", () => {
 
               expect(err).toBeNull();
               Topic.findOne({
-                where: { id: this.topic.id }
+                where: { id:1 }
               })
               .then((topic) => {
-                expect(this.topic.title).toBe("JavaScript Frameworks");
+                expect(this.topic.title).toBe("JS Frameworks");
                 done();
               });
             });
