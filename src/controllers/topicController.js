@@ -2,7 +2,7 @@ const topicQueries = require("../db/queries.topics.js");
 const Authorizer = require("../policies/topic");
 
 module.exports = {
-  
+
   index(req, res, next){
     topicQueries.getAllTopics((err, topics) => {
       if(err){
