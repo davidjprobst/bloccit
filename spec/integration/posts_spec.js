@@ -139,7 +139,7 @@ describe("routes : posts", () => {
     describe("GET /topics/:topicId/posts/:id", () => {
 
       it("should render a view with the selected post", (done) => {
-        request.get(`${base}/${this.topic.id}/posts/${this.post.id}`, (err, res, body) => { console.info(body);
+        request.get(`${base}/${this.topic.id}/posts/${this.post.id}`, (err, res, body) => {
           expect(err).toBeNull();
           expect(body).toContain("Snowball Fighting");
           done();
@@ -238,7 +238,7 @@ describe("routes : posts", () => {
       it("should render a new post form", (done) => {
         request.get(`${base}/${this.topic.id}/posts/new`, (err, res, body) => {
           expect(err).toBeNull();
-          expect(body).toContain("Posts");
+          expect(body).toContain("New Post");
           done();
         });
       });
@@ -337,19 +337,6 @@ describe("routes : posts", () => {
 
     describe("POST /topics/:topicId/posts/:id/update", () => {
 
-      it("should return a status code 302", (done) => {
-        request.post({
-          url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
-          form: {
-            title: "Snowman Building Competition",
-            body: "I love watching them melt slowly."
-          }
-        }, (err, res, body) => {
-          expect(res.statusCode).toBe(302);
-          done();
-        });
-      });
-
       it("should update the post with the given values", (done) => {
           const options = {
             url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
@@ -362,7 +349,7 @@ describe("routes : posts", () => {
             (err, res, body) => {
             expect(err).toBeNull();
             Post.findOne({
-              where: {id:1}
+              where: { id:1 }
             })
             .then((post) => {
               expect(post.title).toBe("Snowball Fighting");
