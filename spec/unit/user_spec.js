@@ -64,8 +64,6 @@ describe("User", () => {
           expect(err.message).toContain("validation error");
           done();
         });
-
-        done();
       });
     });
 
